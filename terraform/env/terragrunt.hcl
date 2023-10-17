@@ -1,9 +1,10 @@
 locals {
-  vars = read_terragrunt_config("../env_vars.hcl")
+  product_name = "localisation-services"
+  vars         = read_terragrunt_config("../env_vars.hcl")
 }
 
 inputs = {
-  product_name = "localisation-services"
+  product_name = local.product_name
   account_id   = "${local.vars.inputs.account_id}"
   domain       = "${local.vars.inputs.domain}"
   env          = "${local.vars.inputs.env}"
@@ -32,8 +33,8 @@ remote_state {
   }
   config = {
     encrypt             = true
-    bucket              = "${local.vars.inputs.cost_center_code}-tf"
-    dynamodb_table      = "terraform-state-lock-dynamo"
+    bucket              = "${local.product_name}-tf"
+    dynamodb_table      = "${local.product_name}-tf-state-lock"
     region              = "ca-central-1"
     key                 = "${path_relative_to_include()}/terraform.tfstate"
     s3_bucket_tags      = { CostCentre : local.vars.inputs.cost_center_code }
