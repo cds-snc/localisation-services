@@ -34,7 +34,7 @@ remote_state {
   config = {
     encrypt             = true
     bucket              = "${local.product_name}-tf"
-    dynamodb_table      = "${local.product_name}-tf-state-lock"
+    dynamodb_table      = "tfstate-lock"
     region              = "ca-central-1"
     key                 = "${path_relative_to_include()}/terraform.tfstate"
     s3_bucket_tags      = { CostCentre : local.vars.inputs.cost_center_code }
