@@ -81,18 +81,8 @@ resource "aws_security_group_rule" "weblate_lb_ingress_internet_https" {
 resource "aws_security_group_rule" "weblate_lb_egress_ecs" {
   description              = "Egress from load balancer to Weblate ECS task"
   type                     = "egress"
-  from_port                = 3000
-  to_port                  = 3000
-  protocol                 = "tcp"
-  security_group_id        = aws_security_group.weblate_lb.id
-  source_security_group_id = aws_security_group.weblate_ecs.id
-}
-
-resource "aws_security_group_rule" "weblate_lb_egress_ecs_dashboard" {
-  description              = "Egress from load balancer to ECS dashboard task"
-  type                     = "egress"
-  from_port                = 3001
-  to_port                  = 3001
+  from_port                = 4443
+  to_port                  = 4443
   protocol                 = "tcp"
   security_group_id        = aws_security_group.weblate_lb.id
   source_security_group_id = aws_security_group.weblate_ecs.id
@@ -103,13 +93,13 @@ resource "aws_security_group_rule" "weblate_lb_egress_ecs_dashboard" {
 #
 resource "aws_security_group" "weblate_database" {
   name        = "weblate-database"
-  description = "Identity IDP database - ingress from ECS"
+  description = "Weblate database - ingress from ECS"
   vpc_id      = module.weblate_vpc.vpc_id
   tags        = var.common_tags
 }
 
 resource "aws_security_group_rule" "weblate_database_ingress_ecs" {
-  description              = "Ingress from ECS task to database"
+  description              = "Ingress from Weblate ECS task to database"
   type                     = "ingress"
   from_port                = 5432
   to_port                  = 5432
@@ -129,7 +119,7 @@ resource "aws_security_group" "weblate_redis" {
 }
 
 resource "aws_security_group_rule" "weblate_redis_ingress_ecs" {
-  description              = "Ingress from ECS task to Redis"
+  description              = "Ingress from Weblate ECS task to Redis"
   type                     = "ingress"
   from_port                = 6379
   to_port                  = 6379
