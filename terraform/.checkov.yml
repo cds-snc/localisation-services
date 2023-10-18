@@ -1,2 +1,5 @@
 skip-check:
-  - CKV2_AWS_5 # VPC: security groups are attached in subsequent modules
+  - CKV_AWS_136 # ECR service encryption key is acceptableS
+  - CKV_AWS_158 # CloudWatch service encryption key is acceptable 
+  - CKV_AWS_191 # Elasticache service encryption key is acceptable
+  - CKV2_AWS_5  # VPC: security groups are attached in subsequent modules

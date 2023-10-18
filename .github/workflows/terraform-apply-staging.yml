@@ -12,6 +12,7 @@ env:
   AWS_REGION: ca-central-1
   TERRAFORM_VERSION: 1.6.1
   TERRAGRUNT_VERSION: 0.52.1
+  TF_VAR_redis_auth_token: ${{ secrets.STAGING_WEBLATE_REDIS_AUTH_TOKEN }}
 
 permissions:
   id-token: write
@@ -38,6 +39,14 @@ jobs:
         working-directory: terraform/env/staging/route53
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 
+      - name: Apply ecr
+        working-directory: terraform/env/staging/ecr
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
       - name: Apply network
         working-directory: terraform/env/staging/network
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve  
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Apply redis
+        working-directory: terraform/env/staging/redis
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
