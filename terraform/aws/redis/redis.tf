@@ -49,6 +49,7 @@ resource "aws_elasticache_subnet_group" "weblate" {
   name        = "weblate-${var.env}"
   description = "Weblate cluster subnet group"
   subnet_ids  = var.subnet_private_ids
+  tags        = var.common_tags
 }
 
 data "aws_subnet" "weblate_private_subnet" {
