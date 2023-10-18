@@ -5,11 +5,11 @@ on:
     branches:
       - main
     paths:
-      - "terragrunt/**"
+      - "terraform/**"
       - ".github/workflows/terraform-security-scan.yml"
   pull_request:
     paths:
-      - "terragrunt/**"
+      - "terraform/**"
       - ".github/workflows/terraform-security-scan.yml"
 
 jobs:
