@@ -4,12 +4,21 @@ locals {
 }
 
 inputs = {
-  product_name = local.product_name
-  account_id   = "${local.vars.inputs.account_id}"
-  domain       = "${local.vars.inputs.domain}"
-  env          = "${local.vars.inputs.env}"
-  region       = "ca-central-1"
-  billing_code = "${local.vars.inputs.cost_center_code}"
+  
+  account_id                = local.vars.inputs.account_id
+  billing_code              = local.vars.inputs.cost_center_code
+  cbs_satellite_bucket_name = "cbs-satellite-${local.vars.inputs.account_id}"
+  domain                    = local.vars.inputs.domain
+  env                       = local.vars.inputs.env
+  product_name              = local.product_name
+  region                    = "ca-central-1"
+
+  common_tags = {
+    CostCentre  = local.vars.inputs.cost_center_code
+    Environment = local.vars.inputs.env
+    Product     = local.product_name
+    Terraform   = "true"
+  }  
 }
 
 generate "provider" {

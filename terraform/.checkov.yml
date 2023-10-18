@@ -1,1 +1,2 @@
 skip-check:
+  - CKV2_AWS_5 # VPC: security groups are attached in subsequent modules

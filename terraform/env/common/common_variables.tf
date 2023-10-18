@@ -3,6 +3,16 @@ variable "account_id" {
   type        = string
 }
 
+variable "cbs_satellite_bucket_name" {
+  description = "(Required) Name of the Cloud Based Sensor S3 satellite bucket"
+  type        = string
+}
+
+variable "common_tags" {
+  description = "(Required) The common tags to apply to resources."
+  type        = map(string)
+}
+
 variable "domain" {
   description = "(Required) Domain name of the localisation service"
   type        = string
