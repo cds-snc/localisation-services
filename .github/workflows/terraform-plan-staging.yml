@@ -12,6 +12,8 @@ env:
   TERRAFORM_VERSION: 1.6.1
   TERRAGRUNT_VERSION: 0.52.1
   TF_VAR_redis_auth_token: ${{ secrets.STAGING_WEBLATE_REDIS_AUTH_TOKEN }}
+  TF_VAR_weblate_database_password: ${{ secrets.STAGING_WEBLATE_DATABASE_PASSWORD }}
+  TF_VAR_weblate_database_username: ${{ secrets.STAGING_WEBLATE_DATABASE_USERNAME }}
 
 permissions:
   id-token: write
@@ -24,6 +26,7 @@ jobs:
       fail-fast: false
       matrix:
         include:
+          - module: database
           - module: ecr
           - module: network
           - module: redis
