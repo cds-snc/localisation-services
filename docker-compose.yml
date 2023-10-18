@@ -1,0 +1,48 @@
+version: '3'
+
+services:
+  dev:
+    image: mcr.microsoft.com/vscode/devcontainers/base:buster
+    volumes:
+        - ./:/workspace:cached
+    command: sleep infinity    
+
+  weblate:
+    image: weblate/weblate:5.1
+    restart: unless-stopped
+    env_file:
+      - .env.example
+    ports:
+      - 8080:8080
+    tmpfs:
+      - /run
+      - /tmp
+    volumes:
+      - weblate-data:/app/data
+      - weblate-cache:/app/cache
+    depends_on:
+      - database
+      - cache
+
+  database:
+    image: postgres:15.4-alpine
+    restart: unless-stopped
+    env_file:
+      - .env.example
+    volumes:
+      - postgres-data:/var/lib/postgresql/data
+
+  cache:
+    image: redis:7-alpine
+    restart: unless-stopped
+    env_file:
+      - .env.example
+    command: [redis-server, --save, '60', '1']
+    volumes:
+      - redis-data:/data
+
+volumes:
+  weblate-cache: {}
+  weblate-data: {}
+  postgres-data: {}
+  redis-data: {}
