@@ -6,7 +6,7 @@ module "weblate_vpc" {
   name   = "weblate-${var.env}"
 
   high_availability  = true
-  enable_flow_log    = true
+  enable_flow_log    = false # created with a custom pattern below
   single_nat_gateway = var.env == "staging"
 
   allow_https_request_out          = true
@@ -15,6 +15,15 @@ module "weblate_vpc" {
   allow_https_request_in_response  = true
 
   billing_tag_value = var.billing_code
+}
+
+resource "aws_flow_log" "cloud_based_sensor" {
+  log_destination      = "arn:aws:s3:::${var.cbs_satellite_bucket_name}/vpc_flow_logs/"
+  log_destination_type = "s3"
+  traffic_type         = "ALL"
+  vpc_id               = module.weblate_vpc.vpc_id
+  log_format           = "$${vpc-id} $${version} $${account-id} $${interface-id} $${srcaddr} $${dstaddr} $${srcport} $${dstport} $${protocol} $${packets} $${bytes} $${start} $${end} $${action} $${log-status} $${subnet-id} $${instance-id}"
+  tags                 = var.common_tags
 }
 
 # Required to redirect http requests to https
