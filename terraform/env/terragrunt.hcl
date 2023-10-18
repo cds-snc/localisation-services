@@ -4,12 +4,19 @@ locals {
 }
 
 inputs = {
+  
+  account_id   = local.vars.inputs.account_id
+  billing_code = local.vars.inputs.cost_center_code
+  common_tags  = {
+    CostCentre  = local.vars.inputs.cost_center_code
+    Environment = local.vars.inputs.env
+    Product     = local.product_name
+    Terraform   = "true"
+  }  
+  domain       = local.vars.inputs.domain
+  env          = local.vars.inputs.env
   product_name = local.product_name
-  account_id   = "${local.vars.inputs.account_id}"
-  domain       = "${local.vars.inputs.domain}"
-  env          = "${local.vars.inputs.env}"
   region       = "ca-central-1"
-  billing_code = "${local.vars.inputs.cost_center_code}"
 }
 
 generate "provider" {

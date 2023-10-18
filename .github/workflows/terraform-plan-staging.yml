@@ -23,7 +23,8 @@ jobs:
       fail-fast: false
       matrix:
         include:
-          - module: route53          
+          - module: network
+          - module: route53
 
     runs-on: ubuntu-latest
     steps:

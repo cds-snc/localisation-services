@@ -3,6 +3,11 @@ variable "account_id" {
   type        = string
 }
 
+variable "common_tags" {
+  description = "(Required) The common tags to apply to resources."
+  type        = map(string)
+}
+
 variable "domain" {
   description = "(Required) Domain name of the localisation service"
   type        = string

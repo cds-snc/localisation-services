@@ -36,4 +36,8 @@ jobs:
 
       - name: Apply route53
         working-directory: terraform/env/staging/route53
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve     
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Apply network
+        working-directory: terraform/env/staging/network
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve  
