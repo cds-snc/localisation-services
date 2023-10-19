@@ -53,6 +53,10 @@ jobs:
         working-directory: terraform/env/staging/database
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 
+      - name: Apply load_balancer
+        working-directory: terraform/env/staging/load_balancer
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
       - name: Apply redis
         working-directory: terraform/env/staging/redis
         run: terragrunt apply --terragrunt-non-interactive -auto-approve

@@ -28,6 +28,7 @@ jobs:
         include:
           - module: database
           - module: ecr
+          - module: load_balancer
           - module: network
           - module: redis
           - module: route53
