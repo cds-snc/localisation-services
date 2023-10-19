@@ -75,6 +75,8 @@ resource "aws_lb_listener" "localisation" {
     aws_acm_certificate_validation.localisation,
     aws_route53_record.localisation_validation,
   ]
+
+  tags = var.common_tags
 }
 
 resource "aws_alb_listener_rule" "localisation" {
@@ -91,6 +93,8 @@ resource "aws_alb_listener_rule" "localisation" {
       values = [var.domain]
     }
   }
+
+  tags = var.common_tags
 }
 
 resource "aws_lb_listener" "localisation_http_redirect" {
@@ -107,4 +111,6 @@ resource "aws_lb_listener" "localisation_http_redirect" {
       status_code = "HTTP_301"
     }
   }
+
+  tags = var.common_tags
 }

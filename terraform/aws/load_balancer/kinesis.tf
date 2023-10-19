@@ -30,12 +30,14 @@ resource "aws_kinesis_firehose_delivery_stream" "firehose_waf_logs" {
 resource "aws_iam_role" "firehose_waf_logs" {
   name               = "FirehoseWafLogs"
   assume_role_policy = data.aws_iam_policy_document.firehose_assume.json
+  tags               = var.common_tags
 }
 
 resource "aws_iam_policy" "firehose_waf_logs" {
   name   = "FirehoseWafLogsPolicy"
   path   = "/"
   policy = data.aws_iam_policy_document.firehose_waf_logs.json
+  tags   = var.common_tags
 }
 
 resource "aws_iam_role_policy_attachment" "firehose_waf_logs" {
