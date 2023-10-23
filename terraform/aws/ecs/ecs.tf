@@ -2,10 +2,10 @@ module "localisation_services" {
   source = "github.com/cds-snc/terraform-modules//ecs?ref=v7.2.6"
 
   # General
-  cluster_name   = "localisation-services"
-  service_name   = "weblate"
-  task_cpu       = 2048
-  task_memory    = 4096
+  cluster_name = "localisation-services"
+  service_name = "weblate"
+  task_cpu     = 2048
+  task_memory  = 4096
 
   # Task definition
   container_image       = var.ecr_repository_url_weblate
