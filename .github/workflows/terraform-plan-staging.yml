@@ -12,6 +12,8 @@ env:
   TERRAFORM_VERSION: 1.6.1
   TERRAGRUNT_VERSION: 0.52.1
   TF_VAR_redis_auth_token: ${{ secrets.STAGING_WEBLATE_REDIS_AUTH_TOKEN }}
+  TF_VAR_weblate_admin_email: ${{ secrets.STAGING_WEBLATE_ADMIN_EMAIL }}
+  TF_VAR_weblate_admin_password: ${{ secrets.STAGING_WEBLATE_ADMIN_PASSWORD }}  
   TF_VAR_weblate_database_password: ${{ secrets.STAGING_WEBLATE_DATABASE_PASSWORD }}
   TF_VAR_weblate_database_username: ${{ secrets.STAGING_WEBLATE_DATABASE_USERNAME }}
 
@@ -28,6 +30,7 @@ jobs:
         include:
           - module: database
           - module: ecr
+          - module: ecs
           - module: load_balancer
           - module: network
           - module: redis

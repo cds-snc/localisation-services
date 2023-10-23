@@ -8,17 +8,19 @@ services:
     command: sleep infinity    
 
   weblate:
-    image: weblate/weblate:5.1@sha256:7664cf1ff6116db1bf770826f4e97d9459d6d61235ac658e41358862ccc9905f
+    build:
+      context: ./weblate/docker
+    image: weblate:5.1
     restart: unless-stopped
     env_file:
       - .env.example
     ports:
       - 8080:8080
+      - 4443:4443
     tmpfs:
       - /run
       - /tmp
     volumes:
-      - weblate-data:/app/data
       - weblate-cache:/app/cache
     depends_on:
       - database
@@ -43,6 +45,5 @@ services:
 
 volumes:
   weblate-cache: {}
-  weblate-data: {}
   postgres-data: {}
   redis-data: {}
