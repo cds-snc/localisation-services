@@ -21,7 +21,7 @@ resource "aws_lb" "localisation" {
 }
 
 resource "random_string" "alb_tg_suffix" {
-  length  = 4
+  length  = 3
   special = false
   upper   = false
 }
@@ -35,14 +35,10 @@ resource "aws_lb_target_group" "localisation" {
   vpc_id               = var.vpc_id
 
   health_check {
-    enabled             = true
-    interval            = 10
-    protocol            = "HTTPS"
-    path                = "/"
-    matcher             = "200-399"
-    timeout             = 5
-    healthy_threshold   = 2
-    unhealthy_threshold = 2
+    enabled  = true
+    protocol = "HTTPS"
+    path     = "/healthz"
+    matcher  = "200-399"
   }
 
   stickiness {
@@ -75,24 +71,6 @@ resource "aws_lb_listener" "localisation" {
     aws_acm_certificate_validation.localisation,
     aws_route53_record.localisation_validation,
   ]
-
-  tags = var.common_tags
-}
-
-resource "aws_alb_listener_rule" "localisation" {
-  listener_arn = aws_lb_listener.localisation.arn
-  priority     = 100
-
-  action {
-    type             = "forward"
-    target_group_arn = aws_lb_target_group.localisation.arn
-  }
-
-  condition {
-    host_header {
-      values = [var.domain]
-    }
-  }
 
   tags = var.common_tags
 }

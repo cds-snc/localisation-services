@@ -37,23 +37,47 @@ locals {
       "value" = "0"
     },
     {
+      "name"  = "WEBLATE_ENABLE_HTTPS",
+      "value" = "1"
+    },
+    {
       "name"  = "POSTGRES_DATABASE",
       "value" = "weblate"
     },
     {
+      "name"  = "POSTGRES_PORT",
+      "value" = "5432"
+    },
+    {
+      "name"  = "REDIS_DB",
+      "value" = "0"
+    },
+    {
+      "name"  = "REDIS_PORT",
+      "value" = "6379"
+    },
+    {
+      "name"  = "REDIS_TLS",
+      "value" = "1"
+    },
+    {
+      "name"  = "SESSION_COOKIE_SECURE",
+      "value" = "True"
+    },
+    {
+      "name"  = "SECURE_SSL_REDIRECT",
+      "value" = "True"
+    },
+    {
       "name"  = "CLIENT_MAX_BODY_SIZE",
       "value" = "200M"
-    }
+    },
   ]
 
   container_secrets = [
     {
-      "name"      = "WEBLATE_ADMIN_EMAIL",
-      "valueFrom" = aws_ssm_parameter.weblate_admin_email.arn,
-    },
-    {
-      "name"      = "WEBLATE_ADMIN_PASSWORD",
-      "valueFrom" = aws_ssm_parameter.weblate_admin_password.arn
+      "name"      = "POSTGRES_HOST",
+      "valueFrom" = var.weblate_database_host_secret_arn
     },
     {
       "name"      = "POSTGRES_PASSWORD",
@@ -64,16 +88,20 @@ locals {
       "valueFrom" = var.weblate_database_username_secret_arn
     },
     {
-      "name"      = "POSTGRES_HOST",
-      "valueFrom" = var.weblate_database_host_secret_arn
-    },
-    {
       "name"      = "REDIS_HOST",
       "valueFrom" = var.weblate_redis_url_secret_arn
     },
     {
       "name"      = "REDIS_PASSWORD",
       "valueFrom" = var.weblate_redis_auth_token_secret_arn
+    },
+    {
+      "name"      = "WEBLATE_ADMIN_EMAIL",
+      "valueFrom" = aws_ssm_parameter.weblate_admin_email.arn,
+    },
+    {
+      "name"      = "WEBLATE_ADMIN_PASSWORD",
+      "valueFrom" = aws_ssm_parameter.weblate_admin_password.arn
     },
   ]
 }
