@@ -8,11 +8,12 @@ module "localisation_services" {
   task_memory  = 4096
 
   # Task definition
-  container_image       = var.ecr_repository_url_weblate
+  container_image       = "${var.ecr_repository_url_weblate}:latest"
   container_host_port   = 4443
   container_port        = 4443
   container_environment = local.container_environment
   container_secrets     = local.container_secrets
+
   task_exec_role_policy_documents = [
     data.aws_iam_policy_document.ssm_parameters.json
   ]
