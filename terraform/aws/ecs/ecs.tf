@@ -15,7 +15,7 @@ module "localisation_services" {
   container_secrets     = local.container_secrets
   container_mount_points = [{
     sourceVolume  = local.efs_app_data_name
-    containerPath = local.efs_app_data_root_directory
+    containerPath = "/app/data"
     readOnly      = false
   }]
 
