@@ -1,4 +1,6 @@
 locals {
+  efs_app_data_name = "efs-app-data"
+
   container_environment = [
     {
       "name"  = "WEBLATE_DEBUG",
