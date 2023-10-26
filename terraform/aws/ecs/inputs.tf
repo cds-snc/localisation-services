@@ -23,6 +23,11 @@ variable "security_group_ecs_id" {
   type        = string
 }
 
+variable "security_group_efs_id" {
+  description = "The security group ID to use for the EFS mount targets"
+  type        = string
+}
+
 variable "subnet_private_ids" {
   description = "The private subnet IDs to use for the ECS tasks"
   type        = list(string)

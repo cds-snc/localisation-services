@@ -13,6 +13,7 @@ dependency "network" {
   mock_outputs_merge_with_state           = true
   mock_outputs = {
     weblate_security_group_ecs_id = ""
+    weblate_security_group_efs_id = ""
     weblate_subnet_private_ids    = [""]
     vpc_id                        = ""
   }
@@ -67,6 +68,7 @@ inputs = {
   ecr_repository_url_weblate           = dependency.ecr.outputs.ecr_repository_url_weblate
   lb_target_group_arn                  = dependency.load_balancer.outputs.alb_target_group_arn
   security_group_ecs_id                = dependency.network.outputs.weblate_security_group_ecs_id
+  security_group_efs_id                = dependency.network.outputs.weblate_security_group_efs_id
   subnet_private_ids                   = dependency.network.outputs.weblate_subnet_private_ids
   weblate_database_host_secret_arn     = dependency.database.outputs.weblate_database_host_secret_arn
   weblate_database_username_secret_arn = dependency.database.outputs.weblate_database_username_secret_arn

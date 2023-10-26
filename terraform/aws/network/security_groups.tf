@@ -48,6 +48,16 @@ resource "aws_security_group_rule" "weblate_egress_redis" {
   source_security_group_id = aws_security_group.weblate_redis.id
 }
 
+resource "aws_security_group_rule" "weblate_egress_efs" {
+  description              = "Egress from Weblate ECS task to EFS"
+  type                     = "egress"
+  from_port                = 2049
+  to_port                  = 2049
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.weblate_ecs.id
+  source_security_group_id = aws_security_group.weblate_efs.id
+}
+
 #
 # Load balancer
 #
@@ -125,5 +135,25 @@ resource "aws_security_group_rule" "weblate_redis_ingress_ecs" {
   to_port                  = 6379
   protocol                 = "tcp"
   security_group_id        = aws_security_group.weblate_redis.id
+  source_security_group_id = aws_security_group.weblate_ecs.id
+}
+
+#
+# EFS
+#
+resource "aws_security_group" "weblate_efs" {
+  name        = "weblate-efs"
+  description = "Weblate EFS - ingress from ECS"
+  vpc_id      = module.weblate_vpc.vpc_id
+  tags        = var.common_tags
+}
+
+resource "aws_security_group_rule" "weblate_efs_ingress_ecs" {
+  description              = "Ingress from Weblate ECS task to EFS"
+  type                     = "ingress"
+  from_port                = 2049
+  to_port                  = 2049
+  protocol                 = "tcp"
+  security_group_id        = aws_security_group.weblate_efs.id
   source_security_group_id = aws_security_group.weblate_ecs.id
 }
