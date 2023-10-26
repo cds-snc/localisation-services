@@ -55,6 +55,18 @@ variable "weblate_database_username_secret_arn" {
   type        = string
 }
 
+variable "weblate_google_client_id" {
+  description = "Weblate Google client ID for OAuth"
+  type        = string
+  sensitive   = true
+}
+
+variable "weblate_google_client_secret" {
+  description = "Webalate Google client secret for OAuth"
+  type        = string
+  sensitive   = true
+}
+
 variable "weblate_redis_auth_token_secret_arn" {
   description = "Weblate Redis auth token SSM parameter ARN"
   type        = string

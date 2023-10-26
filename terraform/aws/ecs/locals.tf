@@ -34,7 +34,15 @@ locals {
     },
     {
       "name"  = "WEBLATE_REGISTRATION_OPEN",
-      "value" = "0"
+      "value" = "1"
+    },
+    {
+      "name"  = "WEBLATE_REGISTRATION_ALLOW_BACKENDS",
+      "value" = "google-oauth2"
+    },
+    {
+      "name"  = "WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_WHITELISTED_DOMAINS",
+      "value" = "cds-snc.ca"
     },
     {
       "name"  = "WEBLATE_ENABLE_HTTPS",
@@ -94,6 +102,14 @@ locals {
     {
       "name"      = "REDIS_PASSWORD",
       "valueFrom" = var.weblate_redis_auth_token_secret_arn
+    },
+    {
+      "name"      = "WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY",
+      "valueFrom" = aws_ssm_parameter.weblate_google_client_id.arn,
+    },
+    {
+      "name"      = "WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_SECRET",
+      "valueFrom" = aws_ssm_parameter.weblate_google_client_secret.arn,
     },
     {
       "name"      = "WEBLATE_ADMIN_EMAIL",
