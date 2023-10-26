@@ -77,7 +77,7 @@ resource "aws_efs_access_point" "weblate_data" {
     creation_info {
       owner_gid   = 1000
       owner_uid   = 1000
-      permissions = 750
+      permissions = 775
     }
   }
   tags = var.common_tags

@@ -19,3 +19,17 @@ data "aws_iam_policy_document" "ssm_parameters" {
     ]
   }
 }
+
+data "aws_iam_policy_document" "efs_mount" {
+  statement {
+    effect = "Allow"
+    actions = [
+      "elasticfilesystem:ClientWrite",
+      "elasticfilesystem:ClientMount",
+      "elasticfilesystem:DescribeMountTargets",
+    ]
+    resources = [
+      aws_efs_file_system.weblate_data.arn
+    ]
+  }
+}
