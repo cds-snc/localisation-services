@@ -3,6 +3,11 @@ output "weblate_security_group_ecs_id" {
   value       = aws_security_group.weblate_ecs.id
 }
 
+output "weblate_security_group_efs_id" {
+  description = "Weblate EFS task security group ID"
+  value       = aws_security_group.weblate_efs.id
+}
+
 output "weblate_security_group_database_id" {
   description = "Weblate database security group ID"
   value       = aws_security_group.weblate_database.id
