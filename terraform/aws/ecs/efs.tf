@@ -57,7 +57,7 @@ resource "aws_efs_backup_policy" "weblate_data" {
 }
 
 resource "aws_efs_mount_target" "weblate_data" {
-  for_each = tolist(var.subnet_private_ids)
+  for_each = toset(var.subnet_private_ids)
 
   file_system_id = aws_efs_file_system.weblate_data.id
   subnet_id      = each.value
