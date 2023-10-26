@@ -5,10 +5,10 @@ resource "aws_efs_file_system" "weblate_data" {
 
 resource "aws_efs_file_system_policy" "weblate_data" {
   file_system_id = aws_efs_file_system.weblate_data.id
-  policy         = data.aws_iam_policy_document.weblate_data.json
+  policy         = data.aws_iam_policy_document.efs_access_point_secure.json
 }
 
-data "aws_iam_policy_document" "weblate_data" {
+data "aws_iam_policy_document" "efs_access_point_secure" {
   statement {
     sid    = "AllowAccessThroughAccessPoint"
     effect = "Allow"
