@@ -60,6 +60,12 @@ variable "weblate_database_username_secret_arn" {
   type        = string
 }
 
+variable "weblate_github_credentials" {
+  description = "Weblate GitHub credentials"
+  type        = string
+  sensitive   = true
+}
+
 variable "weblate_google_client_id" {
   description = "Weblate Google client ID for OAuth"
   type        = string

@@ -51,6 +51,10 @@ locals {
       "value" = "1"
     },
     {
+      "name"  = "WEBLATE_SSH_EXTRA_ARGS",
+      "value" = "-p 443"
+    },
+    {
       "name"  = "POSTGRES_DATABASE",
       "value" = "weblate"
     },
@@ -104,6 +108,10 @@ locals {
     {
       "name"      = "REDIS_PASSWORD",
       "valueFrom" = var.weblate_redis_auth_token_secret_arn
+    },
+    {
+      "name"      = "WEBLATE_GITHUB_CREDENTIALS",
+      "valueFrom" = aws_ssm_parameter.weblate_github_credentials.arn,
     },
     {
       "name"      = "WEBLATE_SOCIAL_AUTH_GOOGLE_OAUTH2_KEY",
