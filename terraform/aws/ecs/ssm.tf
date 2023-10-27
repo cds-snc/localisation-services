@@ -12,6 +12,13 @@ resource "aws_ssm_parameter" "weblate_admin_password" {
   tags  = var.common_tags
 }
 
+resource "aws_ssm_parameter" "weblate_github_credentials" {
+  name  = "weblate-github-credentials"
+  type  = "SecureString"
+  value = var.weblate_github_credentials
+  tags  = var.common_tags
+}
+
 resource "aws_ssm_parameter" "weblate_google_client_id" {
   name  = "weblate-google-client-id"
   type  = "SecureString"

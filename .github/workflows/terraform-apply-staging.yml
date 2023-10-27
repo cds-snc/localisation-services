@@ -17,6 +17,7 @@ env:
   TF_VAR_weblate_admin_password: ${{ secrets.STAGING_WEBLATE_ADMIN_PASSWORD }}
   TF_VAR_weblate_database_password: ${{ secrets.STAGING_WEBLATE_DATABASE_PASSWORD }}
   TF_VAR_weblate_database_username: ${{ secrets.STAGING_WEBLATE_DATABASE_USERNAME }}
+  TF_VAR_weblate_github_credentials: ${{ secrets.STAGING_WEBLATE_GITHUB_CREDENTIALS }}
   TF_VAR_weblate_google_client_id: ${{ secrets.STAGING_WEBLATE_GOOGLE_CLIENT_ID }}
   TF_VAR_weblate_google_client_secret: ${{ secrets.STAGING_WEBLATE_GOOGLE_CLIENT_SECRET }}  
 
