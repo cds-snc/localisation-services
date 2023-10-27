@@ -69,4 +69,16 @@ jobs:
 
       - name: Apply ecs
         working-directory: terraform/env/staging/ecs
-        run: terragrunt apply --terragrunt-non-interactive -auto-approve        
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Apply translate
+        working-directory: terraform/env/staging/translate
+        run: terragrunt apply --terragrunt-non-interactive -auto-approve
+
+      - name: Report deployment to Sentinel
+        uses: cds-snc/sentinel-forward-data-action@main
+        with:
+          input_data: '{"product": "localisation", "sha": "${{ github.sha }}", "version": "POC", "repository": "${{ github.repository }}", "environment": "staging"}'
+          log_type: CDS_Product_Deployment_Data
+          log_analytics_workspace_id: ${{ secrets.LOG_ANALYTICS_WORKSPACE_ID }}
+          log_analytics_workspace_key: ${{ secrets.LOG_ANALYTICS_WORKSPACE_KEY }}
