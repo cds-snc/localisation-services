@@ -38,7 +38,7 @@ jobs:
           - module: network
           - module: redis
           - module: route53
-          - module: translate
+          - module: translation
 
     runs-on: ubuntu-latest
     steps:

@@ -72,7 +72,7 @@ jobs:
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 
       - name: Apply translate
-        working-directory: terraform/env/staging/translate
+        working-directory: terraform/env/staging/translation
         run: terragrunt apply --terragrunt-non-interactive -auto-approve
 
       - name: Report deployment to Sentinel
