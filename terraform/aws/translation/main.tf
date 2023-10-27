@@ -5,18 +5,27 @@ resource "aws_iam_user" "automatic_suggestion_weblate" {
   name = "AutomaticSuggestionWeblate"
 }
 
-resource "aws_iam_access_key" "weblate" { 
-  user = aws_iam_user.automatic_suggestion_weblate.name
+resource "aws_iam_group" "weblate_translation" {
+  name = "WeblateTranslation"
+}
+
+resource "aws_iam_user_group_membership" "weblate_translation_automatic_suggestion" {
+  user   = aws_iam_user.automatic_suggestion_weblate.name
+  groups = [aws_iam_group.weblate_translation.name]
+}
+
+resource "aws_iam_access_key" "weblate" {
+  user   = aws_iam_user.automatic_suggestion_weblate.name
   status = "Active"
 }
 
-data "aws_iam_policy" "translate_full_access" { 
+data "aws_iam_policy" "translate_full_access" {
   name = "TranslateFullAccess"
 }
 
-resource "aws_iam_user_policy_attachment" "translate_full_access" {
-  user       = aws_iam_user.automatic_suggestion_weblate.name
+
+resource "aws_iam_group_policy_attachment" "translate_full_access" {
+  group      = aws_iam_group.weblate_translation.name
   policy_arn = data.aws_iam_policy.translate_full_access.arn
 }
-
 
