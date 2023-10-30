@@ -1,4 +1,4 @@
-FROM weblate/weblate:5.1@sha256:7664cf1ff6116db1bf770826f4e97d9459d6d61235ac658e41358862ccc9905f
+FROM weblate/weblate:5.1@sha256:9c5231556b09a75c365aab6a048e962eec1dc47459b52ef96ac510cc12357475
 
 # Self-signed cert used for HTTPS between the load balancer and ECS task
 RUN mkdir -p /tmp/ssl \
