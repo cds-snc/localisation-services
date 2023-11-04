@@ -2,7 +2,7 @@ version: '3'
 
 services:
   dev:
-    image: mcr.microsoft.com/vscode/devcontainers/base:buster@sha256:a0f1021ae76a87997870db2972c0220d6b62b10ce808109ae0599b05af57b4aa
+    image: mcr.microsoft.com/vscode/devcontainers/base:buster@sha256:8b1ae3b7d73d9518849bd5a3d6dfbdbb8d5a57bf4b03ebacc251b1905dff01cb
     volumes:
         - ./:/workspace:cached
     command: sleep infinity    
@@ -35,7 +35,7 @@ services:
       - postgres-data:/var/lib/postgresql/data
 
   cache:
-    image: redis:7-alpine@sha256:2d44eb73209e5af4118de67e89b01709bfec7cc5a4c1cec29665f6d011c70783
+    image: redis:7-alpine@sha256:5482672695b73780afeddb2ee84d58f393f16f34718d76b246c76afe27465d4c
     restart: unless-stopped
     env_file:
       - .env.example
