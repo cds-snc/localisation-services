@@ -2,7 +2,7 @@
 # RDS Postgress cluster across 3 subnets
 #
 module "weblate" {
-  source = "github.com/cds-snc/terraform-modules//rds?ref=v7.2.5"
+  source = "github.com/cds-snc/terraform-modules//rds?ref=v7.3.2"
   name   = "weblate-${var.env}"
 
   database_name  = "weblate"

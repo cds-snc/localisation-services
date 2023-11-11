@@ -1,5 +1,5 @@
 module "localisation_services" {
-  source = "github.com/cds-snc/terraform-modules//ecs?ref=v7.2.11"
+  source = "github.com/cds-snc/terraform-modules//ecs?ref=v7.3.2"
 
   # General
   cluster_name = "localisation-services"

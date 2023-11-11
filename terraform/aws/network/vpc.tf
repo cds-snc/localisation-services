@@ -2,7 +2,7 @@
 # VPC: 3 public + 3 private subnets across 3 availability zones
 #
 module "weblate_vpc" {
-  source = "github.com/cds-snc/terraform-modules//vpc?ref=v7.2.5"
+  source = "github.com/cds-snc/terraform-modules//vpc?ref=v7.3.2"
   name   = "weblate-${var.env}"
 
   high_availability  = true
